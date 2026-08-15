@@ -38,7 +38,8 @@
     -webkit-font-smoothing: antialiased;
   }
   h1,h2,h3,h4{ font-family:'Fraunces', serif; color: var(--moss-deep); margin:0 0 .4em; letter-spacing: -0.01em; }
-  p{ margin: 0 0 1em; color: var(--ink); }
+  p{ margin: 0 0 1em; color: var(--ink); text-align: justify; text-justify: inter-word; hyphens: auto; }
+  li{ text-align: justify; text-justify: inter-word; hyphens: auto; }
   a{ color: var(--clay); }
   ::selection{ background: var(--clay-soft); }
 
@@ -66,6 +67,66 @@
   .breath-label{ font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-soft); }
   @media (prefers-reduced-motion: reduce){ .breath-dot{ animation:none; } }
 
+  /* ---------- breathing exercise widget ---------- */
+  .breath-exercise{
+    background: var(--paper); border:1px solid var(--line); border-radius:20px;
+    padding: 22px 26px; margin: 18px auto 0; max-width: 420px; box-shadow: var(--shadow);
+    text-align:center;
+  }
+  .breath-exercise p{ text-align:center; font-size:.92rem; color: var(--ink-soft); margin-bottom:14px; }
+  .breath-stage-dot{
+    width: 84px; height:84px; border-radius:50%; margin: 0 auto 12px;
+    background: radial-gradient(circle at 35% 30%, var(--sun-soft), var(--sun) 70%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; color:#3A3220; font-size:.95rem;
+    transition: transform 4s ease-in-out;
+  }
+  .breath-stage-dot.inhale{ transform: scale(1.35); }
+  .breath-stage-dot.exhale{ transform: scale(0.85); }
+  .breath-count{ font-size:.85rem; color: var(--moss-deep); font-weight:700; margin-bottom:14px; min-height:1.2em; }
+  .breath-btn{
+    background: var(--sun); color:#3A3220; border:none; border-radius:999px;
+    padding:12px 26px; font-weight:700; font-size:.95rem; cursor:pointer; font-family:'Karla',sans-serif;
+    box-shadow: 0 8px 18px -8px rgba(226,154,0,.6); transition: transform .15s ease;
+  }
+  .breath-btn:hover{ transform: translateY(-2px); }
+  .breath-btn:disabled{ opacity:.55; cursor:default; transform:none; }
+
+  /* ---------- pomodoro timer ---------- */
+  .pomodoro-card{
+    background: linear-gradient(135deg, var(--sun-soft), var(--paper) 60%);
+    border:1px solid var(--line); border-radius:20px; padding:26px 28px; margin: 30px 0;
+    box-shadow: var(--shadow); text-align:center;
+  }
+  .pomodoro-card h3{ text-align:center; }
+  .pomodoro-card p{ text-align:center; }
+  .pomodoro-display{
+    font-family:'Fraunces',serif; font-size:3rem; font-weight:600; color: var(--moss-deep);
+    margin: 10px 0; letter-spacing:.02em;
+  }
+  .pomodoro-mode{ font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color: var(--sun-deep); font-weight:700; margin-bottom:4px; }
+  .pomodoro-controls{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px; }
+  .pomodoro-btn{
+    border:none; border-radius:999px; padding:11px 22px; font-weight:700; font-size:.9rem;
+    cursor:pointer; font-family:'Karla',sans-serif; transition: transform .15s ease;
+  }
+  .pomodoro-btn:hover{ transform: translateY(-2px); }
+  .pomodoro-btn.start{ background: var(--sun); color:#3A3220; box-shadow: 0 8px 18px -8px rgba(226,154,0,.6); }
+  .pomodoro-btn.reset{ background: transparent; color: var(--moss-deep); border: 2px solid var(--moss); }
+  .pomodoro-cycles{ margin-top:12px; font-size:.82rem; color: var(--ink-soft); }
+
+  /* ---------- mini-app CTA ---------- */
+  .miniapp-card{
+    background: linear-gradient(135deg, #D6F1F4, var(--paper) 60%);
+    border:1px solid var(--line); border-radius:20px; padding:24px 26px; margin: 30px 0 10px;
+    box-shadow: var(--shadow);
+  }
+  .miniapp-card .kicker-small{
+    font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color: var(--sky); font-weight:700; margin-bottom:8px;
+  }
+  .miniapp-card h3{ margin-bottom:8px; }
+  .miniapp-card p{ font-size:.96rem; }
+
   /* ---------- nav ---------- */
   nav.toc{
     position: sticky; top:0; z-index: 50;
@@ -92,8 +153,8 @@
   }
   .kicker{ font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color: var(--sun-deep); font-weight:700; margin-bottom: 14px;}
   .hero h1{ font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight:600; line-height:1.08; }
-  .hero .subtitle{ font-size:1.15rem; color: var(--ink-soft); max-width: 560px; margin: 14px auto 0; }
-  .byline{ margin-top: 26px; font-size:.9rem; color: var(--ink-soft); }
+  .hero .subtitle{ font-size:1.15rem; color: var(--ink-soft); max-width: 560px; margin: 14px auto 0; text-align:center; }
+  .byline{ margin-top: 26px; font-size:.9rem; color: var(--ink-soft); text-align:center; }
   .byline strong{ color: var(--moss-deep); }
 
   section{ max-width: 780px; margin: 0 auto; padding: 0 24px; }
@@ -267,6 +328,15 @@
     margin: 16px 0; box-shadow: 0 10px 26px -14px rgba(58,50,32,.4);
   }
   .video-frame-wrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .video-frame-wrap{ cursor:pointer; background:#000; }
+  .video-thumb{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .video-play-btn{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:72px; height:72px; border-radius:50%; border:none; background: var(--sun);
+    color:#3A3220; font-size:1.6rem; cursor:pointer; box-shadow: 0 10px 24px -8px rgba(0,0,0,.5);
+    display:flex; align-items:center; justify-content:center; transition: transform .15s ease;
+  }
+  .video-play-btn:hover{ transform: translate(-50%,-50%) scale(1.08); }
   .video-links{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
   .btn{
     display:inline-flex; align-items:center; gap:8px; text-decoration:none;
@@ -283,11 +353,14 @@
     border-top: 1px solid var(--line);
   }
   footer h2{ font-size:1.5rem; }
-  footer p{ max-width:520px; margin-left:auto; margin-right:auto; }
+  footer p{ max-width:520px; margin-left:auto; margin-right:auto; text-align:center; }
   .author-photo{
-    width: 168px; height:168px; border-radius:50%; object-fit:cover;
-    border: 5px solid var(--sun); box-shadow: var(--shadow); margin: 8px auto 4px;
+    width: 240px; height:240px; border-radius:50%; object-fit:cover; object-position: center 22%;
+    border: 6px solid var(--sun); box-shadow: var(--shadow); margin: 8px auto 4px;
     display:block;
+  }
+  @media (max-width:600px){
+    .author-photo{ width: 180px; height:180px; }
   }
   .handle{
     display:inline-block; margin-top: 10px; font-weight:700; color: var(--clay);
@@ -327,6 +400,14 @@
     <div class="breath-dot"></div>
     <div class="breath-label">respire, no seu ritmo</div>
   </div>
+
+  <div class="breath-exercise">
+    <p>Antes de começar, que tal um momento só para respirar? Um pequeno exercício de 5 respirações conscientes.</p>
+    <div class="breath-stage-dot" id="breathStageDot">🌻</div>
+    <div class="breath-count" id="breathCount"></div>
+    <button class="breath-btn" id="breathBtn" onclick="startBreathing()">Começar exercício de respiração</button>
+  </div>
+
   <p class="byline"><strong>Cecília Augusta Vieira Pinto</strong> — Doutora Letras <br>@doutora.letras</p>
 </header>
 
@@ -355,8 +436,9 @@
     <div class="kicker-small">Aula em vídeo · Curso ESCRITAmiga</div>
     <h3>🎥 Quer ver esse assunto sendo explicado com calma?</h3>
     <p>Neste vídeo eu falo bastante sobre organização dos estudos — é uma das aulas que fazem parte do meu curso <strong>ESCRITAmiga</strong>, pensado para te acompanhar na escrita acadêmica com leveza e método. Assista e veja na prática como aplicar o que estamos construindo aqui neste guia.</p>
-    <div class="video-frame-wrap">
-      <iframe src="https://www.youtube.com/embed/WGng2tZGQRU" title="Aula sobre organização dos estudos — Curso ESCRITAmiga" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    <div class="video-frame-wrap" id="videoFrameWrap">
+      <img class="video-thumb" id="videoThumb" src="https://img.youtube.com/vi/WGng2tZGQRU/hqdefault.jpg" alt="Capa do vídeo sobre organização dos estudos" onclick="playVideo()">
+      <button class="video-play-btn" onclick="playVideo()" aria-label="Assistir vídeo">▶</button>
     </div>
     <div class="video-links">
       <a class="btn btn-sun" href="https://youtu.be/WGng2tZGQRU" target="_blank" rel="noopener">▶ Assistir no YouTube</a>
@@ -458,6 +540,13 @@
     <li><strong>Comunique às pessoas próximas</strong> que naquele horário você não está disponível.</li>
     <li><strong>Revise o plano a cada semana,</strong> ajustando o que não foi possível cumprir sem culpa.</li>
   </ul>
+
+  <div class="miniapp-card">
+    <div class="kicker-small">Ferramenta gratuita</div>
+    <h3>🧮 Calcule seu tempo de estudo semanal</h3>
+    <p>Criei um mini aplicativo para te ajudar a colocar em prática o que vimos neste capítulo: com ele você calcula, de forma simples, o tempo que está dedicando ao seu trabalho acadêmico a cada semana.</p>
+    <a class="btn btn-sun" href="https://ceciliadoutoraletras.github.io/mini-app/" target="_blank" rel="noopener">🧮 Abrir mini app de Organização</a>
+  </div>
 </section>
 
 <!-- ================= CAPÍTULO 4 ================= -->
@@ -485,6 +574,18 @@
   </div>
 
   <div class="box dica"><div class="box-title">💡 Micro-rituais de início</div><p>Criar um ritual simples antes de estudar — uma música específica, uma xícara de chá, um momento de leitura das suas metas do dia — sinaliza ao cérebro que é hora de focar. Com o tempo, o ritual se torna um gatilho automático para a concentração.</p></div>
+
+  <div class="pomodoro-card">
+    <h3>🍅 Cronômetro Pomodoro</h3>
+    <p>Coloque a técnica Pomodoro em prática agora mesmo: 25 minutos de foco, 5 minutos de pausa.</p>
+    <div class="pomodoro-mode" id="pomodoroMode">🍅 Foco</div>
+    <div class="pomodoro-display" id="pomodoroDisplay">25:00</div>
+    <div class="pomodoro-controls">
+      <button class="pomodoro-btn start" id="pomodoroStart">Começar</button>
+      <button class="pomodoro-btn reset" id="pomodoroReset">Reiniciar</button>
+    </div>
+    <div class="pomodoro-cycles" id="pomodoroCycles">Nenhum ciclo concluído ainda</div>
+  </div>
 </section>
 
 <!-- ================= CAPÍTULO 5 ================= -->
@@ -569,8 +670,8 @@
   <p>Se este e-book te ajudou de alguma forma — se trouxe mais clareza para sua rotina, diminuiu a sensação de sobrecarga ou te mostrou que é possível estudar de forma mais leve e organizada — eu adoraria saber.</p>
   <p>Conte como está sua jornada acadêmica, quais estratégias funcionaram melhor para você ou quais desafios ainda fazem parte da sua rotina. E, se você compartilhar sua experiência nas redes sociais, marque meu perfil:</p>
   <span class="handle">@doutora.letras</span>
-  <p class="site-link"><a class="btn btn-sun" href="https://doutoraletras.com/" target="_blank" rel="noopener">🌻 doutoraletras.com — cursos, palestras, mentorias e workshops</a></p>
   <p class="sign">Estou torcendo por você.<br>Professora Cecília Augusta 🌻❤️</p>
+  <p class="site-link"><a class="btn btn-sun" href="https://doutoraletras.com/" target="_blank" rel="noopener">🌻 doutoraletras.com — cursos, palestras, mentorias e workshops</a></p>
 </footer>
 
 <script>
@@ -623,6 +724,100 @@
       hint.textContent = card.classList.contains('open') ? 'toque para recolher' : 'toque para ver mais';
     });
   });
+
+  // click-to-play video (avoids embed restriction issues, no need to leave the page)
+  function playVideo(){
+    const wrap = document.getElementById('videoFrameWrap');
+    wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/WGng2tZGQRU?autoplay=1&rel=0&modestbranding=1" title="Aula sobre organização dos estudos — Curso ESCRITAmiga" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+  }
+
+  // breathing exercise: 5 conscious breaths (4s inhale, 4s hold, 6s exhale)
+  function startBreathing(){
+    const btn = document.getElementById('breathBtn');
+    const dot = document.getElementById('breathStageDot');
+    const count = document.getElementById('breathCount');
+    btn.disabled = true;
+    btn.textContent = 'Respirando...';
+    let breath = 0;
+    const totalBreaths = 5;
+
+    function doBreath(){
+      breath++;
+      count.textContent = 'Respiração ' + breath + ' de ' + totalBreaths;
+      dot.textContent = 'Inspire';
+      dot.className = 'breath-stage-dot inhale';
+      setTimeout(() => {
+        dot.textContent = 'Segure';
+        dot.className = 'breath-stage-dot';
+        setTimeout(() => {
+          dot.textContent = 'Solte';
+          dot.className = 'breath-stage-dot exhale';
+          setTimeout(() => {
+            if(breath < totalBreaths){
+              doBreath();
+            } else {
+              dot.textContent = '🌻';
+              dot.className = 'breath-stage-dot';
+              count.textContent = 'Pronto — respire fundo mais uma vez, e vamos começar ✨';
+              btn.disabled = false;
+              btn.textContent = 'Repetir exercício';
+            }
+          }, 6000);
+        }, 2000);
+      }, 4000);
+    }
+    doBreath();
+  }
+
+  // pomodoro timer (cap. 4)
+  (function(){
+    const FOCUS = 25*60, BREAK = 5*60;
+    let secondsLeft = FOCUS, mode = 'focus', running = false, cycles = 0, intervalId = null;
+    const display = document.getElementById('pomodoroDisplay');
+    const modeLabel = document.getElementById('pomodoroMode');
+    const startBtn = document.getElementById('pomodoroStart');
+    const cyclesLabel = document.getElementById('pomodoroCycles');
+    if(!display) return;
+
+    function render(){
+      const m = Math.floor(secondsLeft/60).toString().padStart(2,'0');
+      const s = (secondsLeft%60).toString().padStart(2,'0');
+      display.textContent = m + ':' + s;
+      modeLabel.textContent = mode === 'focus' ? '🍅 Foco' : '☕ Pausa';
+      cyclesLabel.textContent = cycles === 0 ? 'Nenhum ciclo concluído ainda' : cycles + ' ciclo(s) de foco concluído(s)';
+    }
+
+    function tick(){
+      if(secondsLeft > 0){
+        secondsLeft--;
+      } else {
+        mode = (mode === 'focus') ? 'break' : 'focus';
+        if(mode === 'break'){ cycles++; }
+        secondsLeft = (mode === 'focus') ? FOCUS : BREAK;
+      }
+      render();
+    }
+
+    startBtn.addEventListener('click', () => {
+      running = !running;
+      if(running){
+        startBtn.textContent = 'Pausar';
+        intervalId = setInterval(tick, 1000);
+      } else {
+        startBtn.textContent = 'Retomar';
+        clearInterval(intervalId);
+      }
+    });
+
+    document.getElementById('pomodoroReset').addEventListener('click', () => {
+      clearInterval(intervalId);
+      running = false; mode='focus'; secondsLeft = FOCUS; cycles = 0;
+      startBtn.textContent = 'Começar';
+      render();
+    });
+
+    render();
+  })();
 </script>
 
 </body>
